@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blue: Print</title>
+    <!-- for the favicon -->
+    <link rel="icon" type="image/jpeg" href="Asset/Bluecat.jpg">
+
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <nav class="navbar">
+        <div class="nav-spacer"></div>
+        <div class="logo">Blue: Print</div>
+        <button id="theme-toggle" class="theme-btn" aria-label="Toggle Theme">
+            <svg class="sun-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>
+            <svg class="moon-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+        </button>
+    </nav>
+
+    <main class="container">
+        
+        <!-- VIEW 1: HOME SELECTION -->
+        <section id="view-home" class="app-view active-view">
+            <div class="header-text">
+                <img src="Asset/Bluecat.jpg" alt="App Logo" class="main-top-logo">
+                <h1>Select User Mode</h1>
+                <p>Tap to begin your print order.</p>
+            </div>
+
+            <div class="grid-layout">
+                <a href="#" id="mtu-card-btn" class="glass-card">
+                    <div class="card-image-wrapper mtu-wrapper">
+                        <img src="Asset/latest.webp" alt="MTU Logo" class="card-img mtu-logo">
+                    </div>
+                    <h2>MTU Student</h2>
+                </a>
+
+                <a href="#" class="glass-card resident-card-bg">
+                    <div class="card-image-wrapper resident-wrapper">
+                        <img src="Asset/_DSC2954.jpg.jpeg" alt="Kyamgei Landscape" class="card-img resident-img">
+                    </div>
+                    <h2>Kyamgei Resident</h2>
+                </a>
+            </div>
+        </section>
+   
+        <!-- VIEW 2: MTU DASHBOARD -->
+        <section id="view-mtu" class="app-view hidden-view">
+            <div class="header-text">
+                <button id="back-to-home" class="glass-btn back-btn">← Back</button>
+                
+                <div class="progress-tracker">
+                    <div class="step active-step">1</div>
+                    <div class="step-line half-active"></div>
+                    <div class="step">2</div>
+                    <div class="step-line"></div>
+                    <div class="step">3</div>
+                </div>
+
+                <img src="Asset/latest.webp" alt="MTU Logo" class="mtu-dash-logo">
+
+                <h1>Academic Details</h1>
+                <p>Choose your Department and Semester</p>
+            </div>
+
+           <div class="selection-section">
+                <h2 class="section-title">Department</h2>
+                <div class="grid-layout department-grid">
+                    <button class="glass-btn">Electrical</button>
+                    <button class="glass-btn locked-btn" disabled>Electronics 🔒</button>
+                    <button class="glass-btn locked-btn" disabled>Computer 🔒</button>
+                </div>
+            </div>
+
+            <div class="selection-section">
+                <h2 class="section-title">Semester</h2>
+                <div class="grid-layout semester-grid">
+                    <button class="glass-btn locked-btn" disabled>1st Sem 🔒</button>
+                    <button class="glass-btn locked-btn" disabled>2nd Sem 🔒</button>
+                    <button class="glass-btn">3rd Sem</button>
+                </div>
+            </div>
+            <button id="continue-docs" class="primary-btn" disabled>Continue to Documents</button>
+        </section>
+       
+        <!-- VIEW 3: DOCUMENT SELECTION (Step 2) -->
+        <section id="view-documents" class="app-view hidden-view">
+            <div class="header-text">
+                <button id="back-to-mtu" class="glass-btn back-btn">← Back</button>
+                
+                <div class="progress-tracker">
+                    <div class="step active-step">1</div>
+                    <div class="step-line active-line"></div>
+                    <div class="step active-step">2</div>
+                    <div class="step-line half-active"></div>
+                    <div class="step">3</div>
+                </div>
+<img src="Asset/Bluecat.jpg" alt="App Logo" class="small-header-logo">
+                <h1>Select Documents</h1>
+                <p id="dynamic-subtitle">Electrical | 3rd Sem</p>
+            </div>
+
+           <!-- Quick Tools: Timetable & Deadlines -->
+            <div class="quick-tools-row">
+                <button id="btn-timetable" class="glass-btn tool-btn">Time Table</button>
+                <button id="btn-deadline" class="glass-btn tool-btn">Deadlines</button>
+            </div>
+
+            <!-- ============================ -->
+            <!-- 1. LABORATORY (Primary)      -->
+            <!-- ============================ -->
+            <div class="accordion-group">
+                <button class="glass-btn acc-main-btn">Laboratory <span class="chevron">▼</span></button>
+                <div class="acc-wrapper">
+                    <div class="acc-content">
+                        
+                        <div class="sub-acc-group">
+                            <button class="glass-btn acc-sub-btn">Circuit Simulation Lab <span class="chevron">▼</span></button>
+                            <div class="acc-wrapper">
+                                <div class="acc-content doc-list-padded">
+                                    <label class="doc-item glass-card-small"><input type="checkbox" name="docs"><span class="doc-name">Cover page</span><span class="check-indicator"></span></label>
+                                    <label class="doc-item glass-card-small"><input type="checkbox" name="docs"><span class="doc-name">Index</span><span class="check-indicator"></span></label>
+                                    <div class="complex-doc-item glass-card-small">
+                                        <label class="doc-item no-bg"><input type="checkbox" name="docs"><span class="doc-name">Experiment Photo</span><span class="check-indicator"></span></label>
+                                        <select class="glass-select"><option>Exp 1</option><option>Exp 2</option><option>Exp 3</option><option>Exp 4</option><option>Exp 5</option></select>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="sub-acc-group">
+                            <button class="glass-btn acc-sub-btn">Numerical Methods & CP Lab <span class="chevron">▼</span></button>
+                            <div class="acc-wrapper">
+                                <div class="acc-content doc-list-padded">
+                                    <label class="doc-item glass-card-small"><input type="checkbox" name="docs"><span class="doc-name">Cover page</span><span class="check-indicator"></span></label>
+                                    <label class="doc-item glass-card-small"><input type="checkbox" name="docs"><span class="doc-name">Index</span><span class="check-indicator"></span></label>
+                                    <div class="complex-doc-item glass-card-small">
+                                        <label class="doc-item no-bg"><input type="checkbox" name="docs"><span class="doc-name">Experiment Photo</span><span class="check-indicator"></span></label>
+                                        <select class="glass-select"><option>Exp 1</option><option>Exp 2</option><option>Exp 3</option><option>Exp 4</option><option>Exp 5</option></select>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="sub-acc-group">
+                            <button class="glass-btn acc-sub-btn">Solid State Devices Lab <span class="chevron">▼</span></button>
+                            <div class="acc-wrapper">
+                                <div class="acc-content doc-list-padded">
+                                    <label class="doc-item glass-card-small"><input type="checkbox" name="docs"><span class="doc-name">Cover page</span><span class="check-indicator"></span></label>
+                                    <label class="doc-item glass-card-small"><input type="checkbox" name="docs"><span class="doc-name">Index</span><span class="check-indicator"></span></label>
+                                    <div class="complex-doc-item glass-card-small">
+                                        <label class="doc-item no-bg"><input type="checkbox" name="docs"><span class="doc-name">Experiment Photo</span><span class="check-indicator"></span></label>
+                                        <select class="glass-select"><option>Exp 1</option><option>Exp 2</option><option>Exp 3</option><option>Exp 4</option><option>Exp 5</option></select>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="sub-acc-group">
+                            <button class="glass-btn acc-sub-btn">Measurements & Comm Lab <span class="chevron">▼</span></button>
+                            <div class="acc-wrapper">
+                                <div class="acc-content doc-list-padded">
+                                    <label class="doc-item glass-card-small"><input type="checkbox" name="docs"><span class="doc-name">Cover page</span><span class="check-indicator"></span></label>
+                                    <label class="doc-item glass-card-small"><input type="checkbox" name="docs"><span class="doc-name">Index</span><span class="check-indicator"></span></label>
+                                    <div class="complex-doc-item glass-card-small">
+                                        <label class="doc-item no-bg"><input type="checkbox" name="docs"><span class="doc-name">Experiment Photo</span><span class="check-indicator"></span></label>
+                                        <select class="glass-select"><option>Exp 1</option><option>Exp 2</option><option>Exp 3</option><option>Exp 4</option><option>Exp 5</option></select>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+            <!-- ============================ -->
+            <!-- 2. THEORY (Secondary)        -->
+            <!-- ============================ -->
+            <div class="accordion-group">
+                <button class="glass-btn acc-main-btn">Theory <span class="chevron">▼</span></button>
+                <div class="acc-wrapper">
+                    <div class="acc-content">
+                        
+                        <div class="sub-acc-group">
+                            <button class="glass-btn acc-sub-btn">Electrical Circuit Analysis <span class="chevron">▼</span></button>
+                            <div class="acc-wrapper">
+                                <div class="acc-content doc-list-padded">
+                                    <label class="doc-item glass-card-small"><input type="checkbox" name="docs"><span class="doc-name">Assignment Cover</span><span class="check-indicator"></span></label>
+                                    <label class="doc-item glass-card-small"><input type="checkbox" name="docs"><span class="doc-name">Formula Sheet</span><span class="check-indicator"></span></label>
+                                    <label class="doc-item glass-card-small"><input type="checkbox" name="docs"><span class="doc-name">Notes <small>(Price varies)</small></span><span class="check-indicator"></span></label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="sub-acc-group">
+                            <button class="glass-btn acc-sub-btn">Solid State Drive <span class="chevron">▼</span></button>
+                            <div class="acc-wrapper">
+                                <div class="acc-content doc-list-padded">
+                                    <label class="doc-item glass-card-small"><input type="checkbox" name="docs"><span class="doc-name">Assignment Cover</span><span class="check-indicator"></span></label>
+                                    <label class="doc-item glass-card-small"><input type="checkbox" name="docs"><span class="doc-name">Formula Sheet</span><span class="check-indicator"></span></label>
+                                    <label class="doc-item glass-card-small"><input type="checkbox" name="docs"><span class="doc-name">Notes <small>(Price varies)</small></span><span class="check-indicator"></span></label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="sub-acc-group">
+                            <button class="glass-btn acc-sub-btn">ODE & Multivariate Calculus <span class="chevron">▼</span></button>
+                            <div class="acc-wrapper">
+                                <div class="acc-content doc-list-padded">
+                                    <label class="doc-item glass-card-small"><input type="checkbox" name="docs"><span class="doc-name">Assignment Cover</span><span class="check-indicator"></span></label>
+                                    <label class="doc-item glass-card-small"><input type="checkbox" name="docs"><span class="doc-name">Formula Sheet</span><span class="check-indicator"></span></label>
+                                    <label class="doc-item glass-card-small"><input type="checkbox" name="docs"><span class="doc-name">Notes <small>(Price varies)</small></span><span class="check-indicator"></span></label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="sub-acc-group">
+                            <button class="glass-btn acc-sub-btn">Measurements & Communication Systems <span class="chevron">▼</span></button>
+                            <div class="acc-wrapper">
+                                <div class="acc-content doc-list-padded">
+                                    <label class="doc-item glass-card-small"><input type="checkbox" name="docs"><span class="doc-name">Assignment Cover</span><span class="check-indicator"></span></label>
+                                    <label class="doc-item glass-card-small"><input type="checkbox" name="docs"><span class="doc-name">Formula Sheet</span><span class="check-indicator"></span></label>
+                                    <label class="doc-item glass-card-small"><input type="checkbox" name="docs"><span class="doc-name">Notes <small>(Price varies)</small></span><span class="check-indicator"></span></label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="sub-acc-group">
+                            <button class="glass-btn acc-sub-btn">Smart Materials <span class="chevron">▼</span></button>
+                            <div class="acc-wrapper">
+                                <div class="acc-content doc-list-padded">
+                                    <label class="doc-item glass-card-small"><input type="checkbox" name="docs"><span class="doc-name">Assignment Cover</span><span class="check-indicator"></span></label>
+                                    <label class="doc-item glass-card-small"><input type="checkbox" name="docs"><span class="doc-name">Formula Sheet</span><span class="check-indicator"></span></label>
+                                    <label class="doc-item glass-card-small"><input type="checkbox" name="docs"><span class="doc-name">Notes <small>(Price varies)</small></span><span class="check-indicator"></span></label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="sub-acc-group">
+                            <button class="glass-btn acc-sub-btn">Numerical Methods & CP <span class="chevron">▼</span></button>
+                            <div class="acc-wrapper">
+                                <div class="acc-content doc-list-padded">
+                                    <label class="doc-item glass-card-small"><input type="checkbox" name="docs"><span class="doc-name">Assignment Cover</span><span class="check-indicator"></span></label>
+                                    <label class="doc-item glass-card-small"><input type="checkbox" name="docs"><span class="doc-name">Formula Sheet</span><span class="check-indicator"></span></label>
+                                    <label class="doc-item glass-card-small"><input type="checkbox" name="docs"><span class="doc-name">Notes <small>(Price varies)</small></span><span class="check-indicator"></span></label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="sub-acc-group">
+                            <button class="glass-btn acc-sub-btn">Innovation & Creativity <span class="chevron">▼</span></button>
+                            <div class="acc-wrapper">
+                                <div class="acc-content doc-list-padded">
+                                    <label class="doc-item glass-card-small"><input type="checkbox" name="docs"><span class="doc-name">Notes <small>(Price varies)</small></span><span class="check-indicator"></span></label>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+            <button id="proceed-checkout" class="primary-btn" disabled>Proceed to Checkout (0)</button>
+        </section>
+
+
+        <!-- VIEW 4: CHECKOUT (Step 3) -->
+        <section id="view-checkout" class="app-view hidden-view">
+            <div class="header-text">
+                <button id="back-to-docs" class="glass-btn back-btn">← Back</button>
+                
+                <div class="progress-tracker">
+                    <div class="step active-step">1</div>
+                    <div class="step-line active-line"></div>
+                    <div class="step active-step">2</div>
+                    <div class="step-line active-line"></div>
+                    <div class="step active-step">3</div>
+                </div>
+
+                <h1>Checkout</h1>
+                <p>Review your selection and authenticate</p>
+            </div>
+
+            <div class="selection-section">
+                <h2 class="section-title">Order Summary</h2>
+                <div id="order-summary-list" class="document-list">
+                    <!-- JavaScript will inject the selected items here dynamically -->
+                </div>
+            </div>
+
+            <div class="selection-section">
+                <h2 class="section-title">Authentication</h2>
+                <form id="checkout-form" class="glass-form">
+                    
+                    <div class="input-group">
+                        <label for="student-name">Full Name</label>
+                        <input type="text" id="student-name" class="glass-input" required placeholder="e.g. John Doe">
+                    </div>
+                    
+                    <div class="input-group">
+                        <label for="student-reg">Registration Number</label>
+                        <div class="reg-input-wrapper">
+                            <span class="reg-prefix">2501EE</span>
+                            <input type="text" id="student-reg" class="glass-input" required maxlength="4" placeholder="XXXX" pattern="\d{4}" title="Please enter the last 4 digits">
+                        </div>
+                    </div>
+
+                    <div class="input-group">
+                        <label for="student-phone">Phone Number</label>
+                        <input type="tel" id="student-phone" class="glass-input" required placeholder="10-digit mobile number" pattern="[0-9]{10}">
+                    </div>
+
+                    <div class="input-group">
+                        <label for="student-email">MTU Email <small>(Optional)</small></label>
+                        <input type="email" id="student-email" class="glass-input" placeholder="student@mtu.ac.in">
+                    </div>
+
+                    <button type="submit" id="place-order-btn" class="primary-btn">Authenticate & Place Order</button>
+                    <p id="auth-message" class="auth-msg"></p>
+                </form>
+            </div>
+        </section>
+<!-- VIEW 5: SUCCESS / POST-CHECKOUT (Seanime Inspired) -->
+        <section id="view-success" class="app-view hidden-view">
+            <!-- Ambient Glowing Background Blobs -->
+            <div class="ambient-glow bg-blue"></div>
+            <div class="ambient-glow bg-purple"></div>
+
+            <div class="success-container">
+                
+                <!-- Glowing Checkmark -->
+                <div class="glow-check-wrapper">
+                    <svg class="checkmark seanime-check" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 52 52">
+                        <circle class="checkmark-circle" cx="26" cy="26" r="25" fill="none"/>
+                        <path class="checkmark-check" fill="none" d="M14.1 27.2l7.1 7.2 16.7-16.8"/>
+                    </svg>
+                </div>
+
+                <h1 class="success-title gradient-text">Order Confirmed</h1>
+                <p class="success-text">
+                    Your document details and total price will be sent to your registered phone number shortly.
+                </p>
+
+                <!-- Seanime-style Poster Carousel (Mobile Native) -->
+                <div class="stock-showcase-section">
+                    <h3 class="showcase-title">Also in Stock</h3>
+                    <div class="stock-scroll-container">
+                        
+                        <!-- Poster Card 1 -->
+                        <div class="seanime-card">
+                            <img src="" alt="A4 Bond Paper" class="seanime-img">
+                            <div class="seanime-overlay">
+                                <span class="seanime-label">A4 Bond Paper</span>
+                            </div>
+                        </div>
+                        
+                        <!-- Poster Card 2 -->
+                        <div class="seanime-card">
+                            <img src="" alt="Spiral Binding" class="seanime-img">
+                            <div class="seanime-overlay">
+                                <span class="seanime-label">Spiral Binding</span>
+                            </div>
+                        </div>
+
+                        <!-- Poster Card 3 -->
+                        <div class="seanime-card">
+                            <img src="" alt="File Folders" class="seanime-img">
+                            <div class="seanime-overlay">
+                                <span class="seanime-label">File Folders</span>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+                <button id="reset-order-btn" class="glass-btn reset-btn">Place Another Order</button>
+            </div>
+        </section>
+    </main>
+
+    <!-- MODALS ARE NOW SAFELY OUTSIDE THE MAIN TAG -->
+
+    <!-- HYPRLAND-STYLE TERMINAL MODAL (Timetable) -->
+    <div id="timetable-modal" class="hypr-modal-overlay">
+        <div class="hypr-window">
+            <div class="hypr-header">
+                <span class="hypr-title">user@mtu: ~/timetable</span>
+                <button id="close-timetable" class="hypr-close">[x]</button>
+            </div>
+            
+            <div class="hypr-tabs">
+                <button class="hypr-tab" data-day="1">Mon</button>
+                <button class="hypr-tab" data-day="2">Tue</button>
+                <button class="hypr-tab" data-day="3">Wed</button>
+                <button class="hypr-tab" data-day="4">Thu</button>
+                <button class="hypr-tab" data-day="5">Fri</button>
+            </div>
+
+            <div class="hypr-terminal">
+                <pre id="timetable-output"></pre>
+            </div>
+        </div>
+    </div>
+
+    <!-- DEADLINES MODAL (Hyprland Style) -->
+    <div id="deadline-modal" class="hypr-modal-overlay">
+        <div class="hypr-window" style="border-color: #ef4444;">
+            <div class="hypr-header">
+                <span class="hypr-title" style="color: #ef4444;">user@mtu: ~/deadlines --urgent</span>
+                <button id="close-deadline" class="hypr-close">[x]</button>
+            </div>
+            
+            <div class="hypr-terminal">
+                <pre id="deadline-output"></pre>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

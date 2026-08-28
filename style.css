@@ -1,0 +1,1084 @@
+/* =========================================
+   1. BASE VARIABLES & THEME
+   ========================================= */
+:root {
+    --font-family: 'Plus Jakarta Sans', sans-serif;
+    
+    /* Light Theme */
+    --bg-color: #f0f4f8;
+    --text-primary: #1e293b;
+    --text-secondary: #64748b;
+    --glass-bg: rgba(255, 255, 255, 0.4);
+    --glass-border: rgba(255, 255, 255, 0.6);
+    --glass-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.07);
+    --card-hover-bg: rgba(255, 255, 255, 0.6);
+    --accent: #2563eb;
+}
+
+[data-theme="dark"] {
+    /* Dark Theme */
+    --bg-color: #0f172a;
+    --text-primary: #f8fafc;
+    --text-secondary: #94a3b8;
+    --glass-bg: rgba(30, 41, 59, 0.4);
+    --glass-border: rgba(255, 255, 255, 0.08);
+    --glass-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
+    --card-hover-bg: rgba(30, 41, 59, 0.7);
+    --accent: #3b82f6;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    -webkit-tap-highlight-color: transparent;
+}
+
+body {
+    font-family: var(--font-family);
+    background-color: var(--bg-color);
+    color: var(--text-primary);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    transition: background-color 0.4s ease, color 0.4s ease;
+    overflow-x: hidden;
+    position: relative;
+}
+
+/* =========================================
+   2. NAVBAR & TOP LOGO
+   ========================================= */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.5rem 1.5rem;
+    z-index: 10;
+    position: relative;
+}
+
+.nav-spacer {
+    width: 44px; /* Balances the theme button for perfect logo centering */
+}
+
+.logo {
+    font-size: 1.5rem;
+    font-weight: 800;
+    letter-spacing: -0.5px;
+    text-align: center;
+}
+
+.theme-btn {
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-border);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border-radius: 50%;
+    width: 44px;
+    height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--text-primary);
+    cursor: pointer;
+    transition: transform 0.2s ease, background 0.3s ease;
+}
+
+.theme-btn:active {
+    transform: scale(0.95);
+}
+
+.sun-icon { display: none; }
+.moon-icon { display: block; }
+
+[data-theme="dark"] .sun-icon { display: block; }
+[data-theme="dark"] .moon-icon { display: none; }
+
+.main-top-logo {
+    display: block;
+    width: 60px;
+    height: 60px;
+    margin: 0 auto 1.5rem auto; /* Centers logo and pushes H1 down */
+    border-radius: 12px;
+    object-fit: cover;
+    z-index: 2;
+    position: relative;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+}
+
+/* =========================================
+   3. SPA VIEW LOGIC (Fixes Overlapping)
+   ========================================= */
+.app-view {
+    width: 100%;
+    animation: slideIn 0.3s ease forwards;
+    display: none; /* Hidden by default */
+}
+
+.active-view {
+    display: flex; 
+    flex-direction: column;
+}
+
+.hidden-view {
+    display: none;
+}
+
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateX(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+/* =========================================
+   4. MAIN CONTAINER & TYPOGRAPHY
+   ========================================= */
+.container {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    padding: 1rem 1.5rem 3rem 1.5rem;
+    z-index: 10;
+    position: relative;
+}
+
+.header-text {
+    text-align: center;
+    margin-bottom: 2.5rem;
+    margin-top: 1rem;
+    width: 100%;
+}
+
+.header-text h1 {
+    font-size: 2rem;
+    font-weight: 800;
+    line-height: 1.2;
+    margin-bottom: 0.5rem;
+}
+
+.header-text p {
+    color: var(--text-secondary);
+    font-size: 1rem;
+    font-weight: 400;
+}
+
+/* =========================================
+   5. HOME PAGE CARDS (Grid & Glass)
+   ========================================= */
+.grid-layout {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+    width: 100%;
+    max-width: 400px;
+    margin: 0 auto;
+}
+
+@media (min-width: 600px) {
+    .grid-layout {
+        grid-template-columns: 1fr 1fr;
+        max-width: 800px;
+    }
+}
+
+.glass-card {
+    background: var(--glass-bg);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid var(--glass-border);
+    box-shadow: var(--glass-shadow);
+    border-radius: 24px;
+    padding: 2rem 1.5rem;
+    text-align: center;
+    text-decoration: none;
+    color: var(--text-primary);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+    position: relative;
+    overflow: hidden;
+}
+
+.glass-card:hover, .glass-card:active {
+    background: var(--card-hover-bg);
+    transform: translateY(-4px);
+    box-shadow: 0 12px 40px 0 rgba(31, 38, 135, 0.15);
+}
+
+.glass-card h2 {
+    font-size: 1.25rem;
+    font-weight: 700;
+    margin-top: 1.25rem;
+    z-index: 2;
+}
+
+/* Image Wrappers for Cards */
+.card-image-wrapper {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto;
+    z-index: 2;
+    background: rgba(255,255,255,0.1);
+    padding: 10px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+}
+
+.mtu-logo {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+.resident-wrapper {
+    border-radius: 20px; 
+    width: 140px;
+    overflow: hidden;
+    padding: 0;
+}
+
+.resident-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* =========================================
+   6. MTU DASHBOARD (Buttons & Forms)
+   ========================================= */
+
+#view-mtu {
+    width: 100%;
+    max-width: 500px;
+    margin: 0 auto;
+    align-items: center;
+}
+
+/* --- Small Header Logo for Inner Pages --- */
+.small-header-logo {
+    width: 45px;
+    height: 45px;
+    object-fit: cover;
+    border-radius: 10px;
+    margin: 1rem auto 0.5rem auto;
+    display: block;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+    transition: transform 0.3s ease;
+}
+
+.small-header-logo:active {
+    transform: scale(0.95);
+}
+.selection-section {
+    width: 100%;
+    margin-bottom: 2rem;
+    text-align: center;
+}
+
+.section-title {
+    font-size: 1.1rem;
+    font-weight: 800;
+    margin-bottom: 1rem;
+    color: var(--text-secondary);
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+}
+
+.department-grid, .semester-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+    gap: 1rem;
+    width: 100%;
+}
+/* Fallback for smaller mobile screens so buttons don't crunch */
+@media (max-width: 480px) {
+    .department-grid, .semester-grid {
+        grid-template-columns: 1fr; /* Stacks them vertically on small phones */
+    }
+}
+
+.glass-btn {
+    background: var(--glass-bg);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid var(--glass-border);
+    border-radius: 16px;
+    padding: 1rem;
+    font-family: var(--font-family);
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.glass-btn:hover {
+    background: var(--card-hover-bg);
+}
+
+.glass-btn.active {
+    background: rgba(37, 99, 235, 0.2);
+    border-color: var(--accent);
+    color: var(--accent);
+}
+
+.back-btn {
+    margin: 0 auto 1.5rem auto;
+    display: inline-block;
+    width: fit-content;
+    padding: 0.5rem 1.2rem;
+    font-size: 0.9rem;
+    border-radius: 20px;
+}
+
+.primary-btn {
+    display: block;
+    width: 100%;
+    margin: 1rem auto 2rem auto;
+    padding: 1.2rem;
+    background-color: var(--accent);
+    color: #ffffff;
+    text-align: center;
+    text-decoration: none;
+    font-weight: 800;
+    font-size: 1.1rem;
+    border-radius: 16px;
+    border: none;
+    cursor: pointer;
+    box-shadow: 0 4px 15px rgba(37, 99, 235, 0.3);
+    transition: all 0.3s ease;
+}
+
+.primary-btn:active {
+    transform: scale(0.98);
+}
+
+.primary-btn:disabled {
+    background-color: var(--glass-bg);
+    color: var(--text-secondary);
+    cursor: not-allowed;
+    box-shadow: none;
+    border: 1px solid var(--glass-border);
+    transform: none;
+}
+
+/* --- 3-Step Progress Tracker --- */
+.progress-tracker {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    margin: 0 auto 2rem auto;
+    width: 100%;
+    max-width: 250px;
+}
+
+.step {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-border);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.85rem;
+    font-weight: 800;
+    color: var(--text-secondary);
+    transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.step.active-step {
+    background: var(--accent);
+    color: #ffffff;
+    border-color: var(--accent);
+    box-shadow: 0 0 15px rgba(37, 99, 235, 0.4), inset 0 2px 4px rgba(255,255,255,0.3);
+    transform: scale(1.1);
+}
+
+.step-line {
+    flex: 1;
+    height: 4px; 
+    background: var(--glass-border);
+    border-radius: 2px;
+    position: relative;
+    overflow: hidden;
+}
+
+.step-line.half-active::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 50%;
+    background: var(--accent);
+    box-shadow: 0 0 10px var(--accent);
+    border-radius: 2px;
+    transition: width 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.step-line.active-line {
+    background: var(--accent);
+    box-shadow: 0 0 10px var(--accent);
+}
+
+/* --- MTU Dashboard Logo --- */
+.mtu-dash-logo {
+    width: 75px;
+    height: 75px;
+    object-fit: contain;
+    margin: 0 auto 1rem auto;
+    display: block;
+    filter: drop-shadow(0 4px 6px rgba(0,0,0,0.1));
+}
+
+/* --- Enhanced Snappy Button Animations --- */
+.glass-btn {
+    transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.glass-btn.active {
+    background: rgba(37, 99, 235, 0.15);
+    border-color: var(--accent);
+    color: var(--text-primary);
+    box-shadow: inset 0 0 20px rgba(37, 99, 235, 0.1), 0 4px 10px rgba(0,0,0,0.05);
+    transform: translateY(-2px);
+}
+
+/* --- Locked Button States --- */
+.glass-btn.locked-btn {
+    opacity: 0.45;
+    cursor: not-allowed;
+    background: rgba(0, 0, 0, 0.03);
+    color: var(--text-secondary);
+    border-style: dashed;
+    transform: none;
+    box-shadow: none;
+}
+
+[data-theme="dark"] .glass-btn.locked-btn {
+    background: rgba(255, 255, 255, 0.02);
+}
+
+.glass-btn.locked-btn:hover {
+    background: rgba(0, 0, 0, 0.03);
+    transform: none;
+}
+
+/* =========================================
+   7. DOCUMENT CART LOGIC & ACCORDIONS
+   ========================================= */
+.document-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+    width: 100%;
+}
+
+.glass-card-small {
+    background: var(--glass-bg);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid var(--glass-border);
+    border-radius: 16px;
+    padding: 1rem 1.2rem;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    position: relative;
+    overflow: hidden;
+}
+
+.glass-card-small:active {
+    transform: scale(0.98);
+}
+
+.doc-item input[type="checkbox"] {
+    display: none;
+}
+
+.doc-icon {
+    font-size: 1.5rem;
+    margin-right: 1rem;
+}
+
+.doc-name {
+    font-size: 1rem;
+    font-weight: 600;
+    flex: 1;
+    text-align: left;
+    color: var(--text-primary);
+}
+
+.check-indicator {
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    border: 2px solid var(--glass-border);
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.doc-item:has(input:checked) {
+    background: rgba(37, 99, 235, 0.15);
+    border-color: var(--accent);
+    box-shadow: inset 0 0 15px rgba(37, 99, 235, 0.1);
+}
+
+.doc-item:has(input:checked) .check-indicator {
+    background: var(--accent);
+    border-color: var(--accent);
+    box-shadow: 0 0 10px var(--accent);
+}
+
+.doc-item:has(input:checked) .check-indicator::after {
+    content: '✓';
+    color: white;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+/* --- Quick Tools Row --- */
+.quick-tools-row {
+    display: flex;
+    gap: 1rem;
+    width: 100%;
+    max-width: 500px;
+    margin: 0 auto 1.5rem auto;
+}
+
+.tool-btn {
+    flex: 1;
+    padding: 0.8rem;
+    font-size: 0.9rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+}
+
+/* --- Nested Accordions --- */
+.accordion-group {
+    width: 100%;
+    max-width: 500px;
+    margin: 0 auto 1rem auto;
+}
+
+.acc-main-btn, .acc-sub-btn {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    margin-bottom: 0.5rem;
+    padding: 1.2rem;
+}
+
+.acc-sub-btn {
+    padding: 1rem;
+    font-size: 0.95rem;
+    background: rgba(255, 255, 255, 0.15); 
+}
+
+.chevron {
+    transition: transform 0.3s ease;
+    font-size: 0.8rem;
+}
+
+.acc-main-btn.open .chevron, .acc-sub-btn.open .chevron {
+    transform: rotate(-180deg);
+}
+
+/* --- The Grid-Slide Trick (Bulletproof Fix) --- */
+.acc-wrapper {
+    display: grid;
+    grid-template-rows: 0fr;
+    transition: grid-template-rows 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    overflow: hidden; 
+}
+
+.acc-wrapper.open {
+    grid-template-rows: 1fr;
+}
+
+.acc-content {
+    min-height: 0;
+    display: flex;
+    flex-direction: column;
+}
+
+.acc-content > * {
+    margin-bottom: 0.8rem;
+}
+
+.acc-content > *:first-child {
+    margin-top: 0.5rem;
+}
+
+.doc-list-padded {
+    padding: 0 0 0 1rem; 
+}
+
+/* --- Complex Item (Checkbox + Select) Fixed Alignment --- */
+.complex-doc-item {
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+    align-items: stretch; /* Forces the dropdown to fill the width */
+}
+
+/* Restores the proper row layout for the label and check circle */
+.complex-doc-item .doc-item.no-bg {
+    display: flex;
+    align-items: center;
+    justify-content: space-between; /* Pushes text left, circle right */
+    width: 100%;
+    background: transparent;
+    border: none;
+    padding: 0;
+    margin: 0;
+    cursor: pointer;
+}
+
+/* Modernized Dropdown Styling */
+.glass-select {
+    background: rgba(0, 0, 0, 0.05);
+    border: 1px solid var(--glass-border);
+    color: var(--text-primary);
+    padding: 0.8rem 1rem; /* Larger padding for better mobile tapping */
+    border-radius: 8px;
+    font-family: var(--font-family);
+    font-size: 0.95rem;
+    outline: none;
+    width: 100%;
+    appearance: none;
+    cursor: pointer;
+    background-image: url("data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%2364748b%22%20d%3D%22M287%2069.4a17.6%2017.6%200%200%200-13-5.4H18.4c-5%200-9.3%201.8-12.9%205.4A17.6%2017.6%200%200%200%200%2082.2c0%205%201.8%209.3%205.4%2012.9l128%20127.9c3.6%203.6%207.8%205.4%2012.8%205.4s9.2-1.8%2012.8-5.4L287%2095c3.5-3.5%205.4-7.8%205.4-12.8%200-5-1.9-9.2-5.5-12.8z%22%2F%3E%3C%2Fsvg%3E");
+    background-repeat: no-repeat;
+    background-position: right 1rem top 50%;
+    background-size: 0.65rem auto;
+}
+
+[data-theme="dark"] .glass-select {
+    background: rgba(255, 255, 255, 0.05);
+}
+
+.glass-select:focus {
+    border-color: var(--accent);
+}
+
+/* --- Fix for invisible dropdown options in Dark Mode --- */
+.glass-select option {
+    background-color: var(--bg-color); 
+    color: var(--text-primary);
+}
+/* =========================================
+   8. HYPRLAND TERMINAL MODAL
+   ========================================= */
+.hypr-modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.4);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    z-index: 9999; /* BOOSTED: Forces it above absolutely everything */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1.5rem;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+}
+
+.hypr-modal-overlay.active {
+    opacity: 1;
+    pointer-events: auto; /* FIXED: 'auto' is the correct property for HTML */
+    display: flex !important; 
+}
+
+.hypr-window {
+    width: 100%;
+    max-width: 500px;
+    background: rgba(15, 23, 42, 0.85); /* Deep dark background */
+    border: 2px solid var(--accent); /* Sharp Hyprland border */
+    border-radius: 12px;
+    box-shadow: 0 0 30px rgba(37, 99, 235, 0.2);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    transform: translateY(20px) scale(0.98);
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.hypr-modal-overlay.active .hypr-window {
+    transform: translateY(0) scale(1);
+}
+
+.hypr-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.8rem 1rem;
+    background: rgba(0, 0, 0, 0.4);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.hypr-title {
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 0.9rem;
+    color: var(--accent);
+    font-weight: bold;
+}
+
+.hypr-close {
+    background: transparent;
+    border: none;
+    color: #ef4444;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 1.1rem;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.hypr-tabs {
+    display: flex;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.hypr-tab {
+    flex: 1;
+    background: transparent;
+    border: none;
+    padding: 0.8rem 0;
+    color: #64748b;
+    font-family: 'Courier New', Courier, monospace;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.hypr-tab.active {
+    color: #ffffff;
+    background: rgba(255, 255, 255, 0.05);
+    box-shadow: inset 0 -2px 0 var(--accent);
+}
+
+.hypr-terminal {
+    padding: 1.5rem 1rem;
+    max-height: 50vh;
+    overflow-y: auto;
+}
+
+#timetable-output {
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 0.85rem;
+    line-height: 1.5;
+    color: #e2e8f0;
+    white-space: pre-wrap;
+}
+
+/* =========================================
+   9. CHECKOUT & FORM STYLING
+   ========================================= */
+.glass-form {
+    background: var(--glass-bg);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid var(--glass-border);
+    border-radius: 20px;
+    padding: 1.5rem;
+    text-align: left;
+    margin-bottom: 2rem;
+}
+
+.input-group {
+    margin-bottom: 1.2rem;
+}
+
+.input-group label {
+    display: block;
+    font-size: 0.9rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    color: var(--text-secondary);
+}
+
+.glass-input {
+    width: 100%;
+    background: rgba(0, 0, 0, 0.05);
+    border: 1px solid var(--glass-border);
+    padding: 0.8rem 1rem;
+    border-radius: 8px;
+    color: var(--text-primary);
+    font-family: var(--font-family);
+    font-size: 1rem;
+    outline: none;
+    transition: border-color 0.3s ease;
+}
+
+[data-theme="dark"] .glass-input {
+    background: rgba(255, 255, 255, 0.05);
+}
+
+.glass-input:focus {
+    border-color: var(--accent);
+}
+
+/* Registration Number Input specific styling */
+.reg-input-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.reg-prefix {
+    font-weight: 800;
+    background: rgba(0, 0, 0, 0.08);
+    padding: 0.8rem;
+    border-radius: 8px;
+    color: var(--text-secondary);
+    border: 1px solid var(--glass-border);
+}
+
+[data-theme="dark"] .reg-prefix {
+    background: rgba(255, 255, 255, 0.08);
+}
+
+/* Authentication Messages */
+.auth-msg {
+    text-align: center;
+    font-weight: bold;
+    margin-top: 1rem;
+    font-size: 0.9rem;
+    min-height: 20px;
+}
+.auth-msg.error { color: #ef4444; }
+.auth-msg.success { color: #22c55e; }
+
+/* Dynamic Summary Item Styling */
+.summary-item-text {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    text-align: left;
+}
+
+.summary-subject {
+    font-size: 0.75rem;
+    color: var(--text-secondary);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 0.2rem;
+}
+/* =========================================
+   10. SUCCESS PAGE (Seanime Aesthetic)
+   ========================================= */
+#view-success {
+    position: relative;
+    overflow: hidden; /* Contains the glowing blobs */
+    padding-top: 2rem;
+}
+
+/* --- Ambient Glow Blobs --- */
+.ambient-glow {
+    position: absolute;
+    width: 250px;
+    height: 250px;
+    border-radius: 50%;
+    filter: blur(80px);
+    z-index: 0;
+    opacity: 0.5;
+    animation: pulseGlow 6s infinite alternate;
+}
+
+.bg-blue {
+    background: rgba(37, 99, 235, 0.6);
+    top: -50px;
+    left: -50px;
+}
+
+.bg-purple {
+    background: rgba(139, 92, 246, 0.5);
+    top: 100px;
+    right: -80px;
+}
+
+@keyframes pulseGlow {
+    0% { transform: scale(1); opacity: 0.4; }
+    100% { transform: scale(1.2); opacity: 0.7; }
+}
+
+.success-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    width: 100%;
+    position: relative;
+    z-index: 2; /* Keeps content above the glow */
+}
+
+/* --- Gradient Typography --- */
+.gradient-text {
+    font-size: 2.2rem;
+    font-weight: 800;
+    margin-bottom: 0.5rem;
+    background: linear-gradient(135deg, #60a5fa, #a78bfa);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.success-text {
+    color: var(--text-secondary);
+    font-size: 0.95rem;
+    line-height: 1.5;
+    margin-bottom: 3rem;
+    padding: 0 1rem;
+}
+
+/* --- Animated SVG Checkmark (Enhanced with Glow) --- */
+.glow-check-wrapper {
+    width: 90px;
+    height: 90px;
+    margin-bottom: 1.5rem;
+    filter: drop-shadow(0 0 15px rgba(34, 197, 94, 0.4));
+}
+
+.seanime-check {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    display: block;
+    stroke-width: 3;
+    stroke: #22c55e;
+    stroke-miterlimit: 10;
+    animation: fill .4s ease-in-out .4s forwards, scale .3s ease-in-out .9s both;
+}
+
+.checkmark-circle {
+    stroke-dasharray: 166;
+    stroke-dashoffset: 166;
+    stroke-width: 3;
+    stroke: #22c55e;
+    fill: none;
+    animation: stroke 0.6s cubic-bezier(0.65, 0, 0.45, 1) forwards;
+}
+
+.checkmark-check {
+    transform-origin: 50% 50%;
+    stroke-dasharray: 48;
+    stroke-dashoffset: 48;
+    animation: stroke 0.3s cubic-bezier(0.65, 0, 0.45, 1) 0.6s forwards;
+}
+
+@keyframes stroke { 100% { stroke-dashoffset: 0; } }
+@keyframes scale {
+    0%, 100% { transform: none; }
+    50% { transform: scale3d(1.1, 1.1, 1); }
+}
+@keyframes fill {
+    100% { box-shadow: inset 0px 0px 0px 45px rgba(34, 197, 94, 0.15); }
+}
+
+/* --- Seanime Style Poster Carousel --- */
+.stock-showcase-section {
+    width: 100%;
+    margin-bottom: 2.5rem;
+    text-align: left;
+}
+
+.showcase-title {
+    font-size: 1.1rem;
+    font-weight: 800;
+    color: var(--text-primary);
+    margin-bottom: 1.2rem;
+    padding-left: 0.5rem;
+}
+
+.stock-scroll-container {
+    display: flex;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    gap: 1.2rem;
+    padding-bottom: 1rem;
+    padding-left: 0.5rem;
+    padding-right: 1.5rem;
+    -ms-overflow-style: none;  
+    scrollbar-width: none;  
+}
+
+.stock-scroll-container::-webkit-scrollbar {
+    display: none;
+}
+
+/* Poster Cards */
+.seanime-card {
+    min-width: 130px;
+    height: 190px;
+    border-radius: 12px;
+    position: relative;
+    overflow: hidden;
+    scroll-snap-align: start;
+    background: rgba(0, 0, 0, 0.2);
+    border: 1px solid var(--glass-border);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+    transition: transform 0.3s ease;
+}
+
+.seanime-card:active {
+    transform: scale(0.95);
+}
+
+.seanime-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0; /* Hides broken image icon until you add real sources */
+}
+
+/* Bottom fade for text readability */
+.seanime-overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 50%;
+    background: linear-gradient(to top, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0) 100%);
+    display: flex;
+    align-items: flex-end;
+    padding: 1rem 0.8rem;
+}
+
+.seanime-label {
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: #ffffff;
+    line-height: 1.2;
+}
+
+.reset-btn {
+    width: 100%;
+    max-width: 300px;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid var(--glass-border);
+    margin-bottom: 2rem;
+}
